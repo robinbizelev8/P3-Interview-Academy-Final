@@ -12,7 +12,7 @@ import { Phone, Users, TrendingUp, Code, Building, Play, CheckCircle, Star, Arro
 import type { InterviewType, JobDescription } from "@shared/schema";
 import JobDescriptionUpload from "@/components/JobDescriptionUpload";
 import heroImage from "@assets/generated_images/Professional_interview_scene_5a39200f.png";
-import aiConceptImage from "@assets/generated_images/AI_interview_technology_concept_f5b99eb1.png";
+import aiConceptImage from "@assets/generated_images/AI_technology_concept_corrected_eb0a4f3b.png";
 import stagesImage from "@assets/generated_images/Interview_stages_infographic_3f48a0af.png";
 
 const interviewTypes = [
