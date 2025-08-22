@@ -11,7 +11,9 @@ import { toast } from "@/hooks/use-toast";
 import { Phone, Users, TrendingUp, Code, Building, Play, CheckCircle, Star, ArrowRight } from "lucide-react";
 import type { InterviewType, JobDescription } from "@shared/schema";
 import JobDescriptionUpload from "@/components/JobDescriptionUpload";
-// Images removed - can be added back when assets are available
+import heroImage from "@assets/generated_images/Professional_interview_scene_5a39200f.png";
+import aiConceptImage from "@assets/generated_images/AI_interview_technology_concept_f5b99eb1.png";
+import stagesImage from "@assets/generated_images/Interview_stages_infographic_3f48a0af.png";
 
 const interviewTypes = [
   { value: 'phone-screening' as InterviewType, label: 'Stage 1: Phone/Initial Screening (HR)', icon: Phone, description: 'Basic qualifications, culture fit, salary expectations' },
@@ -214,7 +216,7 @@ export default function Home() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-600 rounded-2xl blur-3xl opacity-20"></div>
               <img 
-                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9IiNGNEY0RjQiLz48dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5JbnRlcnZpZXcgUHJlcGFyYXRpb248L3RleHQ+PC9zdmc+" 
+src={heroImage} 
                 alt="Professional interview scene"
                 className="relative w-full h-auto rounded-2xl shadow-2xl border border-white/20"
               />
@@ -419,7 +421,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
             <div>
               <img 
-                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9IiNGNEY0RjQiLz48dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5BSSBGZWVkYmFjazwvdGV4dD48L3N2Zz4=" 
+src={aiConceptImage} 
                 alt="AI interview technology"
                 className="w-full h-auto rounded-2xl shadow-lg"
               />

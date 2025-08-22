@@ -17,3 +17,6 @@ author = 43337567
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run dev"
+
+[nix]
+channel = "stable-25_05"
