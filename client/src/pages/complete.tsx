@@ -16,12 +16,12 @@ export default function Complete() {
     enabled: !!sessionId,
   });
 
-  const { data: responses } = useQuery({
+  const { data: responses = [] } = useQuery({
     queryKey: ['/api/responses/session', sessionId],
     enabled: !!sessionId,
   });
 
-  if (!session || !responses) {
+  if (!session) {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header />
@@ -34,8 +34,8 @@ export default function Complete() {
     );
   }
 
-  const averageScore = responses.reduce((sum: number, r: any) => sum + (r.feedback?.score || 0), 0) / responses.length;
-  const totalTime = responses.reduce((sum: number, r: any) => sum + (r.timeSpent || 0), 0);
+  const averageScore = Array.isArray(responses) && responses.length > 0 ? responses.reduce((sum: number, r: any) => sum + (r.feedback?.score || 0), 0) / responses.length : 0;
+  const totalTime = Array.isArray(responses) ? responses.reduce((sum: number, r: any) => sum + (r.timeSpent || 0), 0) : 0;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -78,7 +78,7 @@ export default function Complete() {
               </div>
               <div>
                 <div className="text-4xl font-bold text-success-green mb-2">
-                  {responses.length}
+                  {Array.isArray(responses) ? responses.length : 0}
                 </div>
                 <div className="text-sm text-gray-600">Questions Completed</div>
                 <div className="text-xs text-gray-500">100% completion</div>
@@ -108,7 +108,7 @@ export default function Complete() {
                 <div>
                   <div className="font-medium text-gray-900">STAR Framework Mastery</div>
                   <div className="text-sm text-gray-600">
-                    Successfully structured {Math.round((responses.filter((r: any) => r.feedback?.starCompliance?.situation).length / responses.length) * 100)}% of responses using STAR method
+                    Successfully structured {Array.isArray(responses) && responses.length > 0 ? Math.round((responses.filter((r: any) => r.feedback?.starCompliance?.situation).length / responses.length) * 100) : 0}% of responses using STAR method
                   </div>
                 </div>
               </div>

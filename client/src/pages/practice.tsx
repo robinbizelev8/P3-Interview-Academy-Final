@@ -57,16 +57,16 @@ export default function Practice() {
   });
 
   const { data: questions, isLoading: questionsLoading } = useQuery({
-    queryKey: ['/api/questions', session?.interviewType, sessionId],
+    queryKey: ['/api/questions', (session as any)?.interviewType, sessionId],
     queryFn: async () => {
-      if (!session?.interviewType || !sessionId) return [];
-      const response = await fetch(`/api/questions?type=${session.interviewType}&sessionId=${sessionId}`);
+      if (!(session as any)?.interviewType || !sessionId) return [];
+      const response = await fetch(`/api/questions?type=${(session as any).interviewType}&sessionId=${sessionId}`);
       return response.json();
     },
-    enabled: !!session?.interviewType && !!sessionId,
+    enabled: !!(session as any)?.interviewType && !!sessionId,
   });
 
-  const { data: responses, isLoading: responsesLoading } = useQuery({
+  const { data: responses = [], isLoading: responsesLoading } = useQuery({
     queryKey: ['/api/responses/session', sessionId],
     enabled: !!sessionId,
   });
@@ -100,9 +100,9 @@ export default function Practice() {
     );
   }
 
-  const currentQuestionIndex = session.currentQuestionIndex || 0;
+  const currentQuestionIndex = (session as any)?.currentQuestionIndex || 0;
   const question = questions[currentQuestionIndex];
-  const response = responses?.find((r: any) => r.questionId === question?.id);
+  const response = Array.isArray(responses) ? responses.find((r: any) => r.questionId === question?.id) : undefined;
 
   if (!question) {
     return (
@@ -130,10 +130,10 @@ export default function Practice() {
         />
         
         <StageHeader 
-          title={getStageTitle(session.interviewType)}
-          subtitle={`${session.position} • ${session.company} • ${getStageCategory(session.interviewType)}`}
-          description={getStageDescription(session.interviewType)}
-          interviewType={session.interviewType}
+          title={getStageTitle((session as any)?.interviewType)}
+          subtitle={`${(session as any)?.position || ''} • ${(session as any)?.company || ''} • ${getStageCategory((session as any)?.interviewType)}`}
+          description={getStageDescription((session as any)?.interviewType)}
+          interviewType={(session as any)?.interviewType}
         />
         
         <QuestionInterface 

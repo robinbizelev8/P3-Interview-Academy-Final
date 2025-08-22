@@ -33,11 +33,13 @@ export default function QuestionInterface({ question, currentIndex, totalQuestio
       
       {/* Question Tags */}
       <div className="flex flex-wrap gap-2">
-        {question.tags && Array.isArray(question.tags) && question.tags.map((tag: string) => (
-          <Badge key={tag} variant="secondary" className="text-xs">
-            {tag}
-          </Badge>
-        ))}
+        {question.tags && Array.isArray(question.tags) ? 
+          (question.tags as string[]).map((tag: string) => (
+            <Badge key={tag} variant="secondary" className="text-xs">
+              {tag}
+            </Badge>
+          )) : null
+        }
       </div>
     </div>
   );

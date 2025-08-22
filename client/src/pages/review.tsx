@@ -16,22 +16,22 @@ export default function Review() {
     enabled: !!sessionId,
   });
 
-  const { data: responses } = useQuery({
+  const { data: responses = [] } = useQuery({
     queryKey: ['/api/responses/session', sessionId],
     enabled: !!sessionId,
   });
 
   const { data: questions } = useQuery({
-    queryKey: ['/api/questions', session?.interviewType],
+    queryKey: ['/api/questions', (session as any)?.interviewType],
     queryFn: async () => {
-      if (!session?.interviewType) return [];
-      const response = await fetch(`/api/questions?type=${session.interviewType}`);
+      if (!(session as any)?.interviewType) return [];
+      const response = await fetch(`/api/questions?type=${(session as any).interviewType}`);
       return response.json();
     },
-    enabled: !!session?.interviewType,
+    enabled: !!(session as any)?.interviewType,
   });
 
-  if (!session || !responses || !questions) {
+  if (!session || !questions) {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header />
@@ -45,8 +45,8 @@ export default function Review() {
   }
 
   // Calculate overall performance metrics
-  const totalResponses = responses?.length || 0;
-  const averageScore = totalResponses > 0 ? (responses?.reduce((sum: number, r: any) => sum + (r.feedback?.score || 0), 0) || 0) / totalResponses : 0;
+  const totalResponses = Array.isArray(responses) ? responses.length : 0;
+  const averageScore = totalResponses > 0 && Array.isArray(responses) ? (responses.reduce((sum: number, r: any) => sum + (r.feedback?.score || 0), 0) || 0) / totalResponses : 0;
   const completionRate = questions?.length ? (totalResponses / questions.length) * 100 : 0;
 
   return (
@@ -143,7 +143,7 @@ export default function Review() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {responses?.map((response: any, index: number) => {
+              {Array.isArray(responses) && responses.map((response: any, index: number) => {
                 const question = questions.find((q: any) => q.id === response.questionId);
                 if (!question) return null;
 
